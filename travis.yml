@@ -10,14 +10,13 @@ script:
     - docker run -e CI=true girishbabu/react-test npm test
 
 after_success:
-  - docker build -t girishbabu/fibo-client ./client
-  - docker build -t girishbabu/fibo-nginx ./nginx
-  - docker build -t girishbabu/fibo-server ./server
-  - docker build -t girishbabu/fibo-worker ./worker
+  - docker build -t fibo-client ./client
+  - docker build -t fibo-nginx ./nginx
+  - docker build -t fibo-server ./server
+  - docker build -t fibo-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push girishbabu/fibo-client
-  - docker push girishbabu/fibo-nginx
-  - docker push girishbabu/fibo-server
-  - docker push girishbabu/fibo-worker
-  - docker push girishbabu/react-test
+  - docker push girishbabu/fibo:fibo-client
+  - docker push girishbabu/fibo:fibo-nginx
+  - docker push girishbabu/fibo:fibo-server
+  - docker push girishbabu/fibo:fibo-worker
 
