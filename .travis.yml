@@ -17,8 +17,8 @@ after_success:
   - docker build -t fibo-server ./server
   - docker build -t fibo-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push girishbabu/fibo:fibo-client
-  - docker push girishbabu/fibo:fibo-nginx
-  - docker push girishbabu/fibo:fibo-server
-  - docker push girishbabu/fibo:fibo-worker
+  - docker push girirbabu/fibo:fibo-client
+  - docker push girirbabu/fibo:fibo-nginx
+  - docker push girirbabu/fibo:fibo-server
+  - docker push girirbabu/fibo:fibo-worker
 
