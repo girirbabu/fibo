@@ -22,3 +22,16 @@ after_success:
   - docker push girirbabu/fibo-server
   - docker push girirbabu/fibo-worker
 
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: fibo-docker
+  env: FiboDocker-env
+  bucket_name: elasticbeanstalk-us-east-2-727869003203
+  bucket_path: fibo-bucket
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+
