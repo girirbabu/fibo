@@ -1,0 +1,23 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t girishbabu/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true girishbabu/react-test npm test
+
+after_success:
+  - docker build -t girishbabu/fibo-client ./client
+  - docker build -t girishbabu/fibo-nginx ./nginx
+  - docker build -t girishbabu/fibo-server ./server
+  - docker build -t girishbabu/fibo-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push girishbabu/fibo-client
+  - docker push girishbabu/fibo-nginx
+  - docker push girishbabu/fibo-server
+  - docker push girishbabu/fibo-worker
+  - docker push girishbabu/react-test
+
